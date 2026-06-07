@@ -1,0 +1,290 @@
+<template>
+  <div class="px-4 pt-6 text-gray-400 dark:text-gray-300 2xl:px-0">
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      雅思大作文 · Task 2
+    </h3>
+    <div class="mb-4">
+      <p>40 分钟，至少 250 词，考察论点展开和逻辑论证能力。占写作总分 2/3，是决定写作分数的关键。</p>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      评分标准
+    </h3>
+    <div class="mb-4">
+      <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <thead class="bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3">标准</th>
+            <th class="px-6 py-3">占比</th>
+            <th class="px-6 py-3">要求</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Task Response</td>
+            <td class="px-6 py-4">25%</td>
+            <td class="px-6 py-4">完整回应题目，论点充分展开，立场清晰</td>
+          </tr>
+          <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Coherence & Cohesion</td>
+            <td class="px-6 py-4">25%</td>
+            <td class="px-6 py-4">段落清晰，逻辑递进，衔接词自然</td>
+          </tr>
+          <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Lexical Resource</td>
+            <td class="px-6 py-4">25%</td>
+            <td class="px-6 py-4">词汇精准多样，搭配地道，少重复</td>
+          </tr>
+          <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Grammatical Range</td>
+            <td class="px-6 py-4">25%</td>
+            <td class="px-6 py-4">复合句、倒装、强调、虚拟等多种语法结构</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      题型分类 & 框架
+    </h3>
+    <div class="mb-4 space-y-4">
+      <!-- Opinion -->
+      <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+        <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+          1. 观点类 Opinion (Agree/Disagree)
+        </h4>
+        <p class="text-sm text-gray-400 dark:text-gray-300 mb-2">例题: Some people think that governments should spend money on railways rather than roads. To what extent do you agree or disagree?</p>
+        <div class="grid gap-4 md:grid-cols-4 text-base">
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Intro</span>
+            <p class="text-sm">Paraphrase + 明确立场 (fully agree / partly agree / disagree)</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 1</span>
+            <p class="text-sm">理由 1 + 解释 + 举例</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 2</span>
+            <p class="text-sm">理由 2 + 解释 + 举例（或让步+反驳）</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Conclusion</span>
+            <p class="text-sm">重申立场 + 总结理由</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discussion -->
+      <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+        <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+          2. 讨论类 Discussion (Discuss Both Views)
+        </h4>
+        <p class="text-sm text-gray-400 dark:text-gray-300 mb-2">例题: Some people think that hosting international sports events is beneficial, while others believe it is a waste of money. Discuss both views and give your opinion.</p>
+        <div class="grid gap-4 md:grid-cols-4 text-base">
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Intro</span>
+            <p class="text-sm">Paraphrase + 点明双方观点 + 暗示自身立场</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 1</span>
+            <p class="text-sm">讨论观点 A + 支持理由</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 2</span>
+            <p class="text-sm">讨论观点 B + 明确自身立场</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Conclusion</span>
+            <p class="text-sm">总结 + 重申观点</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem-Solution -->
+      <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+        <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+          3. 问题解决类 Problem-Solution / Causes-Effects
+        </h4>
+        <p class="text-sm text-gray-400 dark:text-gray-300 mb-2">例题: In many countries, people are living longer than ever before. What problems does this cause and what solutions can you suggest?</p>
+        <div class="grid gap-4 md:grid-cols-4 text-base">
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Intro</span>
+            <p class="text-sm">Paraphrase + 概述问题/原因</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 1</span>
+            <p class="text-sm">问题/原因 1 + 问题/原因 2 + 解释</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 2</span>
+            <p class="text-sm">解决方案 1 + 解决方案 2 + 解释</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Conclusion</span>
+            <p class="text-sm">总结问题的严重性 + 解决方案的可行性</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advantages-Disadvantages -->
+      <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+        <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+          4. 利弊类 Advantages/Disadvantages
+        </h4>
+        <p class="text-sm text-gray-400 dark:text-gray-300 mb-2">例题: More and more people are choosing to work from home. Do the advantages outweigh the disadvantages?</p>
+        <div class="grid gap-4 md:grid-cols-4 text-base">
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Intro</span>
+            <p class="text-sm">Paraphrase + 表明立场（利大于弊/弊大于利）</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 1</span>
+            <p class="text-sm">优点 1 + 优点 2 + 解释/举例</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Body 2</span>
+            <p class="text-sm">缺点 1 + 弱化反驳（admittedly... however...）</p>
+          </div>
+          <div>
+            <span class="font-bold text-gray-900 dark:text-white">Conclusion</span>
+            <p class="text-sm">重申 + 总结判断</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      高频话题词汇
+    </h3>
+    <div class="mb-4">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">教育</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">academic performance, curriculum, vocational training, lifelong learning, critical thinking, rote learning, tuition fees, extracurricular activities, tertiary education, holistic development</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">科技</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">artificial intelligence, automation, screen addiction, digital literacy, technological innovation, social media, data privacy, remote working, e-commerce, the digital divide</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">环境</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">climate change, carbon emissions, renewable energy, sustainable development, deforestation, biodiversity, fossil fuels, carbon footprint, overconsumption, eco-friendly</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">社会/政府</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">public funding, infrastructure, social welfare, income inequality, urbanization, ageing population, law enforcement, civic responsibility, tax revenue, policy-making</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">健康</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">sedentary lifestyle, obesity, mental health, healthcare system, preventive medicine, life expectancy, fast food, work-life balance, dietary habits, physical well-being</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">文化/全球化</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">cultural diversity, globalization, cultural heritage, multicultural society, language barrier, cultural assimilation, international tourism, traditions and customs, cultural identity, melting pot</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">工作/经济</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">job satisfaction, work-life balance, career prospects, unemployment rate, economic growth, consumer spending, minimum wage, gender pay gap, self-employment, job security</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4 dark:border-gray-700">
+          <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">犯罪/法律</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">juvenile delinquency, capital punishment, rehabilitation, deterrence, reoffend, community service, prison overcrowding, white-collar crime, law-abiding citizen, minor offence</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      高频衔接语
+    </h3>
+    <div class="mb-4">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-base text-gray-500 dark:text-gray-400">
+          <thead class="bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th class="px-6 py-3">功能</th>
+              <th class="px-6 py-3">表达</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">引出观点</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">It is widely believed that... / There is a growing consensus that... / From my perspective, ...</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">列举论点</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Firstly, ... / In addition, ... / Furthermore, ... / Another key factor is ...</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">举例</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">For instance, ... / A case in point is ... / Take ... as an example</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">因果</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">As a result, ... / This leads to ... / Consequently, ... / ... stems from ...</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">让步转折</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Having said that, ... / Nevertheless, ... / That being said, ... / Admittedly, ... however ...</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">强调</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">It is worth noting that... / Particularly, ... / Undoubtedly, ...</td>
+            </tr>
+            <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+              <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">结论</td>
+              <td class="px-6 py-4 text-gray-600 dark:text-gray-300">In conclusion, ... / To sum up, ... / On balance, ... / Taking everything into account, ...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      5 分钟审题法
+    </h3>
+    <div class="mb-4">
+      <div class="grid gap-4 md:grid-cols-5 text-base">
+        <div class="border border-gray-200 rounded-lg p-3 dark:border-gray-700 text-center">
+          <div class="font-bold text-gray-900 dark:text-white text-lg mb-1">1</div>
+          <p class="font-bold text-gray-900 dark:text-white">判断题型</p>
+          <p class="text-sm text-gray-400 dark:text-gray-300">Opinion / Discussion / Problem-Solution / Adv-Disadv</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-3 dark:border-gray-700 text-center">
+          <div class="font-bold text-gray-900 dark:text-white text-lg mb-1">2</div>
+          <p class="font-bold text-gray-900 dark:text-white">圈关键词</p>
+          <p class="text-sm text-gray-400 dark:text-gray-300">锁定主题范围，不要偏题</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-3 dark:border-gray-700 text-center">
+          <div class="font-bold text-gray-900 dark:text-white text-lg mb-1">3</div>
+          <p class="font-bold text-gray-900 dark:text-white">确定立场</p>
+          <p class="text-sm text-gray-400 dark:text-gray-300">选择容易展开的一方</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-3 dark:border-gray-700 text-center">
+          <div class="font-bold text-gray-900 dark:text-white text-lg mb-1">4</div>
+          <p class="font-bold text-gray-900 dark:text-white">头脑风暴</p>
+          <p class="text-sm text-gray-400 dark:text-gray-300">2-3 个分论点 + 例子</p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-3 dark:border-gray-700 text-center">
+          <div class="font-bold text-gray-900 dark:text-white text-lg mb-1">5</div>
+          <p class="font-bold text-gray-900 dark:text-white">列大纲</p>
+          <p class="text-sm text-gray-400 dark:text-gray-300">每段主题句 + 关键词</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
+      备考建议
+    </h3>
+    <div class="mb-4">
+      <ul class="ml-6 list-disc text-base space-y-1">
+        <li>限时练习 — 5 分钟审题 + 30 分钟写作 + 5 分钟检查，严格卡时间</li>
+        <li>先练结构再练语言 — 确保每篇都有清晰的 Introduction → Body → Conclusion</li>
+        <li>PEEL 段落展开 — Point → Explanation → Example → Link back</li>
+        <li>背话题词汇，不背整篇范文 — 词汇按话题分组积累，套用到不同题目</li>
+        <li>观点 > 词汇 — 考官更看重逻辑和论证深度，不要为了秀词汇硬塞</li>
+        <li>写完必改 — 用 ChatGPT/Grammarly 检查语法 + 对比范文找差距</li>
+        <li>目标词数 — 250 词是最低要求，7 分以上建议 280-320 词</li>
+      </ul>
+    </div>
+  </div>
+</template>

@@ -23,10 +23,15 @@ function onKeydown(e, word) {
   }
 }
 
+const playingWord = ref('')
+
 function play(word) {
+  playingWord.value = word
   const audio = document.createElement('audio')
   audio.src = `/179_audios/${word}.mp3`
-  audio.play()
+  audio.onended = () => { playingWord.value = '' }
+  audio.onerror = () => { playingWord.value = '' }
+  audio.play().catch(() => { playingWord.value = '' })
 }
 function next(index) {
   const i = index + 1
@@ -117,7 +122,7 @@ function next(index) {
               {{ w.type }}
             </td>
             <td class="px-6 py-4">
-              <button class="i-carbon-volume-up-filled" @click="play(w.word)" />
+              <button class="i-carbon-volume-up-filled cursor-pointer hover:text-blue-500 transition-colors" :class="{ 'text-blue-500 animate-pulse': playingWord === w.word }" @click="play(w.word)" />
             </td>
             <td
               class="flex flex-row items-center justify-start px-6 py-4"

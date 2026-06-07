@@ -11,22 +11,58 @@ const startTime = ref<number | null>(null)
 const wpm = ref(0)
 const accuracy = ref(100)
 const isFinished = ref(false)
+const shuffleMode = ref<'order' | 'chapter-shuffle' | 'full-shuffle'>('order')
 
 const words = computed(() => {
   const chapter = (vocabulary as any)[selectedChapter.value]
   if (!chapter)
     return []
-  // Flatten groups into a single list of words
   return chapter.words.flat()
 })
 
-const currentWordData = computed(() => words.value[currentWordIndex.value])
+const allWordsWithChapter = computed(() => {
+  const result: any[] = []
+  for (const chName of chapters) {
+    const chapter = (vocabulary as any)[chName]
+    if (chapter) {
+      for (const word of chapter.words.flat())
+        result.push({ ...word, _chapter: chName })
+    }
+  }
+  return result
+})
+
+const shuffledWords = ref<any[]>([])
+
+function shuffleArray(arr: any[]) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+const displayWords = computed(() => {
+  if (shuffleMode.value === 'chapter-shuffle') return shuffledWords.value
+  if (shuffleMode.value === 'full-shuffle') return shuffledWords.value
+  return words.value
+})
+
+const currentWordData = computed(() => displayWords.value[currentWordIndex.value])
 const currentWord = computed(() => currentWordData.value?.word[0] || '')
 
 watch(selectedChapter, (newVal) => {
   localStorage.setItem(CHAPTER_KEY, newVal)
   reset()
 })
+
+function cycleShuffle() {
+  if (shuffleMode.value === 'order') shuffleMode.value = 'chapter-shuffle'
+  else if (shuffleMode.value === 'chapter-shuffle') shuffleMode.value = 'full-shuffle'
+  else shuffleMode.value = 'order'
+  reset()
+}
 
 function reset() {
   currentWordIndex.value = 0
@@ -35,12 +71,16 @@ function reset() {
   wpm.value = 0
   accuracy.value = 100
   isFinished.value = false
+  if (shuffleMode.value === 'chapter-shuffle')
+    shuffledWords.value = shuffleArray(words.value)
+  else if (shuffleMode.value === 'full-shuffle')
+    shuffledWords.value = shuffleArray(allWordsWithChapter.value)
   playAudio()
 }
 
 let audio = null as HTMLAudioElement | null
 function playAudio() {
-  const category = selectedChapter.value
+  const category = currentWordData.value?._chapter || selectedChapter.value
   const word = currentWord.value
   const audioPath = `vocabulary/audio/${category}/${word}.mp3`
   if (audio) {
@@ -88,7 +128,7 @@ function handleInput(e: Event) {
 }
 
 function nextWord() {
-  if (currentWordIndex.value < words.value.length - 1) {
+  if (currentWordIndex.value < displayWords.value.length - 1) {
     currentWordIndex.value++
     userInput.value = ''
     startTime.value = null
@@ -113,16 +153,28 @@ onMounted(() => {
           <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white">单词打字练习</h1>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">照着背景单词输入，提升你的速度</p>
         </div>
-        <select
-          v-model="selectedChapter"
-          class="block w-48 border border-gray-300 rounded-lg bg-white p-2.5 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-blue-500"
-        >
-          <option
-            v-for="c in chapters"
-            :key="c"
-            :value="c"
-          >{{ c }}</option>
-        </select>
+        <div class="flex items-center gap-3">
+          <button
+            class="px-3 py-2 text-sm rounded-lg border transition-colors"
+            :class="shuffleMode !== 'order'
+              ? 'bg-blue-600 text-white border-blue-600'
+              : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700'"
+            @click="cycleShuffle"
+          >
+            <i class="i-carbon-shuffle block" />
+            {{ shuffleMode === 'full-shuffle' ? '全库随机' : shuffleMode === 'chapter-shuffle' ? '本章随机' : '顺序' }}
+          </button>
+          <select
+            v-model="selectedChapter"
+            class="block w-48 border border-gray-300 rounded-lg bg-white p-2.5 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-blue-500"
+          >
+            <option
+              v-for="c in chapters"
+              :key="c"
+              :value="c"
+            >{{ c.replace(/_/g, ' ') }}</option>
+          </select>
+        </div>
       </div>
 
       <!-- Stats -->
@@ -146,7 +198,7 @@ onMounted(() => {
           class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 text-center"
         >
           <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">进度</div>
-          <div class="text-2xl font-bold dark:text-white">{{ currentWordIndex + 1 }} / {{ words.length }}</div>
+          <div class="text-2xl font-bold dark:text-white">{{ currentWordIndex + 1 }} / {{ displayWords.length }}</div>
         </div>
       </div>
 
@@ -190,7 +242,9 @@ onMounted(() => {
           autocomplete="off"
           spellcheck="false"
           v-model="userInput"
+          :maxlength="currentWord.length"
           @input="handleInput"
+          @keydown.stop
           :disabled="isFinished"
         />
 

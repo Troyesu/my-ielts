@@ -271,7 +271,7 @@ function copyAllError() {
                 <thead class="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th class="p-4 text-left text-xs font-medium tracking-wider text-gray-500 dark:text-white">
-                      #
+                      索引
                     </th>
                     <th class="p-4 text-xs font-medium tracking-wider text-gray-500 dark:text-white">
                       <br>
@@ -317,7 +317,7 @@ function copyAllError() {
                       v-for="item of wordGroup"
                       v-show="(isTrainingModel && (isOnlyShowErrors ? item.spellError : true)) || !isTrainingModel" :id="`tr_${item.id}`"
                       :key="item.id"
-                      :class="{ 'bg-gray-50 dark:bg-gray-700': item.id % 2 === 0, [`group-color-${i % 15}`]: true }" class="text-sm text-gray-900 dark:text-white"
+                      :class="`group-color-${i % 15}`" class="text-sm text-gray-900 dark:text-white"
                     >
                       <td class="p-4">
                         {{ item.id }}
@@ -342,7 +342,7 @@ function copyAllError() {
                           >
                         </template>
                       </td>
-                      <td class="group relative whitespace-nowrap p-4">
+                      <td class="group relative whitespace-nowrap p-4 text-gray-600 dark:text-gray-300">
                         <div v-if="!isTrainingModel || item.showSource || (isTrainingModel && isOnlyShowErrors && item.spellError) || isShowSource">
                           <p v-for="w in item.word" :key="w">
                             <a
@@ -359,16 +359,16 @@ function copyAllError() {
                           </div>
                         </div>
                       </td>
-                      <td style="font-style: italic; font-family: times;">
+                      <td class="text-gray-400 dark:text-gray-500" style="font-style: italic; font-family: times;">
                         {{ item.pos }}
                       </td>
-                      <td class="p-4">
+                      <td class="p-4 text-gray-400 dark:text-gray-500">
                         {{ isShowMeaning ? item.meaning : '' }}
                       </td>
-                      <td class="p-4">
+                      <td class="p-4 text-gray-600 dark:text-gray-300">
                         {{ isTrainingModel ? '' : item.example }}
                       </td>
-                      <td class="p-4">
+                      <td class="p-4 text-gray-400 dark:text-gray-500">
                         {{ isTrainingModel ? '' : item.extra }}
                       </td>
                     </tr>

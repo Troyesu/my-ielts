@@ -2,10 +2,15 @@
 import words from './listening179.json'
 
 const ws = reactive(words)
+const playingWord = ref('')
+
 function play(word) {
+  playingWord.value = word
   const audio = document.createElement('audio')
-  audio.src = `179_audios/${word}.mp3`
-  audio.play()
+  audio.src = `/179_audios/${word}.mp3`
+  audio.onended = () => { playingWord.value = '' }
+  audio.onerror = () => { playingWord.value = '' }
+  audio.play().catch(() => { playingWord.value = '' })
 }
 
 const keyword = ref('')
@@ -73,7 +78,7 @@ const keyword = ref('')
             {{ w.index }}
           </td>
           <td class="px-6 py-4">
-            <a href="javascript:;" class="i-carbon-volume-up-filled block" @click="play(w.word)" />
+            <a href="javascript:;" class="i-carbon-volume-up-filled block cursor-pointer hover:text-blue-500 transition-colors" :class="{ 'text-blue-500 animate-pulse': playingWord === w.word }" @click="play(w.word)" />
           </td>
           <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
             <a

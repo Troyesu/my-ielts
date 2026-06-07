@@ -28,7 +28,7 @@ const menus = reactive([
     label: '口语',
     icon: 'i-carbon-microphone',
     link: '/speaking',
-    desc: 'TODO 或许加入逻辑链相关内容',
+    desc: 'ARE/OREC 逻辑链 · Part 1/2/3 框架 · 高频话题 · 衔接语',
   },
   {
     label: '阅读',
@@ -58,12 +58,12 @@ const menus = reactive([
         <h1 style="font-family: Charmonman;" class="mb-16 text-center text-6xl text-gray-900 dark:text-white">
           Salvation lies within <span class="font-bold text-#f00">IELTS</span>
         </h1>
-        <div class="mb-8 max-w-screen-md lg:mb-16">
+        <div class="mb-8 max-w-screen-md lg:mb-16 text-center mx-auto">
           <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             我的 IELTS 备考中心
           </h2>
           <p class="text-gray-500 sm:text-xl dark:text-gray-400">
-            Hello, This is Frank. 这里包含我备考准备的一切，从词汇、语法开始...
+            Hello, This is Troy. 这里包含我备考准备的一切，从词汇、语法开始...
           </p>
         </div>
         <div class="md:grid lg:grid-cols-3 md:grid-cols-2 md:gap-12 space-y-8 md:space-y-0">

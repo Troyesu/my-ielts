@@ -12,7 +12,7 @@
       <h3 class="mb-4 text-xl font-semibold dark:text-white">
         视频
       </h3>
-      <iframe style="width: 100%; aspect-ratio: 16 / 9;" class="mb-4" src="https://www.youtube.com/embed/bxvyZwACfNk?si=_dXajzpGFCYZ1gOa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe style="width: 100%; aspect-ratio: 16 / 9;" class="mb-4" src="//player.bilibili.com/player.html?bvid=BV1o5PNekEfG&page=1" title="Bilibili video player" frameborder="0" allowfullscreen />
       <h3 class="mb-4 text-xl font-semibold dark:text-white">
         讲义
       </h3>

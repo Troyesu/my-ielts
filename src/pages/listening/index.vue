@@ -21,7 +21,7 @@ const scoreTable = [
 </script>
 
 <template>
-  <div class="px-4 pt-6 text-gray-500 2xl:px-0 dark:text-gray-400">
+  <div class="px-4 pt-6 text-gray-400 dark:text-gray-300 2xl:px-0">
     <h3 class="mb-4 text-xl font-semibold text-black dark:text-white">
       概述
     </h3>

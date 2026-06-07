@@ -1,28 +1,56 @@
 <script setup>
 import chapterData from './spelling_convention'
 
+const playingWord = ref('')
+
+function getWordName(word) {
+  return Array.isArray(word) ? word[0] : word
+}
+
 function play(word) {
+  const name = getWordName(word)
+  playingWord.value = name
   const audio = document.createElement('audio')
-  audio.src = `179_audios/${word}.mp3`
-  audio.play()
+  audio.src = `/179_audios/${name}.mp3`
+  audio.onended = () => { playingWord.value = '' }
+  audio.onerror = () => { playingWord.value = '' }
+  audio.play().catch(() => { playingWord.value = '' })
 }
 
 const keyword = ref('')
 const chapter = ref('Chapter2 拼写规范')
+const sectionIndex = ref(0)
 const chapters = [
   'Chapter2 拼写规范',
   'Chapter3 特别名词',
   'Chapter4 形容词副词',
+  'Chapter5 吞音连读',
+  'Chapter8 生存语料库',
+  'Chapter11 综合测试',
+  'Chapter12 8分核心词汇',
+  'Chapter13 同义替换',
+  'Chapter14 考点与趋势',
 ]
 
-const curChapter = computed(() => {
-  const { rows } = chapterData[chapter.value]
-  rows.forEach((e) => {
-    if (typeof e[0] === 'string')
-      e[0] = e[0].split(', ')
-  })
-  return chapterData[chapter.value]
+const curChapter = computed(() => chapterData[chapter.value])
+
+const sections = computed(() => curChapter.value?.sections || [])
+
+const curSection = computed(() => {
+  const sec = sections.value[sectionIndex.value]
+  if (sec) {
+    sec.rows.forEach((e) => {
+      if (typeof e[0] === 'string')
+        e[0] = e[0].split(', ')
+    })
+  }
+  return sec
 })
+
+function selectChapter(ch) {
+  chapter.value = ch
+  sectionIndex.value = 0
+}
 </script>
 
 <template>
@@ -39,10 +67,8 @@ const curChapter = computed(() => {
         <select
           v-model="chapter"
           class="block w-full flex-1 border border-gray-300 rounded-lg bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 focus:border-blue-500 dark:bg-gray-700 dark:text-white focus:ring-blue-500 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400"
+          @change="selectChapter(chapter)"
         >
-          <!-- <option value="">
-            全部章节
-          </option> -->
           <option
             v-for="k in chapters"
             :key="k"
@@ -66,27 +92,43 @@ const curChapter = computed(() => {
       </div>
     </div>
   </div>
+
+  <!-- Section tabs -->
+  <div v-if="sections.length > 1" class="mt-4 flex flex-wrap gap-2">
+    <button
+      v-for="(sec, idx) in sections"
+      :key="idx"
+      class="px-3 py-1.5 text-sm rounded-lg border transition-colors"
+      :class="sectionIndex === idx
+        ? 'bg-blue-600 text-white border-blue-600'
+        : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700'"
+      @click="sectionIndex = idx"
+    >
+      {{ sec.title }}
+    </button>
+  </div>
+
   <div class="mt-6">
-    <template v-if="chapter === 'Chapter2 拼写规范'">
+    <template v-if="curSection">
       <div class="mb-4 mt-6 items-center justify-between lg:flex">
         <div class="mb-4 lg:mb-0">
           <h3 class="mb-2 font-bold text-gray-900 dark:text-white">
-            {{ curChapter.title }}
+            {{ curSection.title }}
           </h3>
-          <span class="text-base font-normal text-gray-500 dark:text-gray-400">{{ curChapter.desc }}</span>
+          <span class="text-base font-normal text-gray-500 dark:text-gray-400">{{ curSection.desc }}</span>
         </div>
       </div>
       <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
         <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th class="w-0 px-6 py-3">
-              #
+              索引
             </th>
             <th class="w-0">
               <!-- Pronunciation -->
             </th>
             <th
-              v-for="label in curChapter.columns"
+              v-for="label in curSection.columns"
               :key="label"
               class="w-0 px-6 py-3"
             >
@@ -96,80 +138,38 @@ const curChapter = computed(() => {
         </thead>
         <tbody>
           <tr
-            v-for="(row, index) in curChapter.rows"
-            :key="row[0]"
+            v-for="(row, index) in curSection.rows"
+            :key="index"
             class="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
           >
             <td class="px-6 py-4">
-              {{ index }}
+              {{ index + 1 }}
             </td>
             <td class="px-6 py-4">
-              <a href="javascript:;" class="i-carbon-volume-up-filled block" @click="play(row[0])" />
+              <a href="javascript:;" class="i-carbon-volume-up-filled block cursor-pointer hover:text-blue-500 transition-colors" :class="{ 'text-blue-500 animate-pulse': playingWord === getWordName(row[0]) }" @click="play(row[0])" />
             </td>
-            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
+            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-600 dark:text-gray-300">
               <a
                 class="hover:underline"
-                :title="`在剑桥词典中查询 ${row[0][0]}`"
-                :href="`https://dictionary.cambridge.org/dictionary/english-chinese-simplified/${row[0][0]}`"
+                :title="`在剑桥词典中查询 ${getWordName(row[0])}`"
+                :href="`https://dictionary.cambridge.org/dictionary/english-chinese-simplified/${getWordName(row[0])}`"
                 target="_blank"
-              >{{ row[0].join(', ') }}</a>
+              >{{ Array.isArray(row[0]) ? row[0].join(', ') : row[0] }}</a>
             </th>
-            <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
-              {{ row[1] }}
-            </td>
-            <td class="whitespace-nowrap px-6 py-4">
-              {{ row[2] }}
+            <td
+              v-for="ci in curSection.columns.length - 1"
+              :key="ci"
+              class="whitespace-nowrap px-6 py-4"
+              :class="{ 'text-gray-600 dark:text-gray-300': !curSection.columns[ci].includes('中文') &amp;&amp; !curSection.columns[ci].includes('词性'), 'text-gray-400 dark:text-gray-500': curSection.columns[ci].includes('中文') || curSection.columns[ci].includes('词性') }"
+            >
+              {{ row[ci] }}
             </td>
           </tr>
         </tbody>
       </table>
     </template>
-    <!-- <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-      <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th class="w-0 px-6 py-3">
-            #
-          </th>
-          <th class="w-0 px-6 py-3" />
-          <th scope="col" class="w-0 px-6 py-3">
-            考点词
-          </th>
-          <th scope="col" class="w-0 px-6 py-3">
-            词性
-          </th>
-          <th scope="col" class="w-80 px-6 py-3">
-            词义
-          </th>
-          <th scope="col" class="px-6 py-3">
-            同义替换
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="w in ws" :key="w.index" class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-          <td class="px-6 py-4">
-            {{ w.index }}
-          </td>
-          <td class="px-6 py-4">
-            <a href="javascript:;" class="i-carbon-volume-up-filled block" @click="play(w.word)" />
-          </td>
-          <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
-            <a
-              :href="`https://dictionary.cambridge.org/dictionary/english-chinese-simplified/${w.word}`"
-              target="_blank"
-            >{{ w.word }}</a>
-          </th>
-          <td class="px-6 py-4 italic">
-            {{ w.type }}
-          </td>
-          <td class="px-6 py-4">
-            {{ w.meaning }}
-          </td>
-          <td class="px-6 py-4">
-            {{ w.replace.join(', ') }}
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
+    <div v-else class="text-center py-12 text-gray-500 dark:text-gray-400">
+      暂无数据，敬请期待
+    </div>
   </div>
 </template>

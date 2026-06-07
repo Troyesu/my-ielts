@@ -14,12 +14,12 @@ import sentences from './100sentences'
             aria-current="page">100 句翻译练习</a>
         </li>
         <li class="w-full">
-          <a href="/#/writing"
-            class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">[WIP]雅思大作文</a>
+          <a href="/#/writing/task2"
+            class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">雅思大作文</a>
         </li>
         <li class="w-full">
-          <a href="/#/writing"
-            class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">[WIP]雅思小作文</a>
+          <a href="/#/writing/task1"
+            class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">雅思小作文</a>
         </li>
       </ul>
 
@@ -54,11 +54,11 @@ import sentences from './100sentences'
                     </th>
                   </tr>
                 </thead> -->
-                <tbody class="bg-white dark:bg-gray-800 border-b-1">
+                <tbody class="bg-white dark:bg-gray-800 border-b-1 text-gray-600 dark:text-gray-300">
                   <template v-for="item of sentences" :key="item.no" class="text-sm text-gray-900 dark:text-white">
                     <template v-if="item.no == null">
                       <tr class="border-t-1 border-x-1">
-                        <td colspan="5" class="p-4 font-bold text-xl">{{ item.title }}</td>
+                        <td colspan="5" class="p-4 font-bold text-xl text-gray-900 dark:text-white">{{ item.title }}</td>
                       </tr>
                     </template>
                     <template v-else>
