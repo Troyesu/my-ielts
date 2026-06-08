@@ -11,7 +11,7 @@ function play(word) {
   const name = getWordName(word)
   playingWord.value = name
   const audio = document.createElement('audio')
-  audio.src = `/179_audios/${name}.mp3`
+  audio.src = `${import.meta.env.BASE_URL}179_audios/${name}.mp3`
   audio.onended = () => { playingWord.value = '' }
   audio.onerror = () => { playingWord.value = '' }
   audio.play().catch(() => { playingWord.value = '' })

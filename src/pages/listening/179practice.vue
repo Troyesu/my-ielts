@@ -28,7 +28,7 @@ const playingWord = ref('')
 function play(word) {
   playingWord.value = word
   const audio = document.createElement('audio')
-  audio.src = `/179_audios/${word}.mp3`
+  audio.src = `${import.meta.env.BASE_URL}179_audios/${word}.mp3`
   audio.onended = () => { playingWord.value = '' }
   audio.onerror = () => { playingWord.value = '' }
   audio.play().catch(() => { playingWord.value = '' })
